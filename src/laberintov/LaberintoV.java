@@ -17,13 +17,15 @@ public class LaberintoV {
     
     public static void main(String[] args) {
         int m[][] = new int[3][3];
-        //laberinto(m,0,0,2,2,1);
-        //laberintoTodasCasillas(m,0,0,2,2,1);
-        //laberintoAlgunasCasillas(m,0,0,2,2,1);
+        m[1][1]= 1;
+        laberinto(m,2,2,1,1,2);
+        //laberintoTodasCasillas(m,2,2,1,1,1);
+        //laberintoAlgunasCasillas(m,2,2,0,0,2);
         //laberintoMejoradoDiagonal(m,0,0,2,2,1);
-        laberintoMejoradoDiagonalTodasCasillas(m,0,0,2,2,1);
+        //laberintoMejoradoDiagonalTodasCasillas(m,0,0,2,2,1);
         //laberintoMejoradoDiagonalAlgunasCasillas(m,0,0,2,2,1);
         System.out.println("Sol= "+c);
+        
     }
     
     public static void mostrar(int m[][]){
