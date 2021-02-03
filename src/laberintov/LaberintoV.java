@@ -17,8 +17,8 @@ public class LaberintoV {
     
     public static void main(String[] args) {
         int m[][] = new int[3][3];
-        m[1][1]= 1;
-        laberinto(m,2,2,1,1,2);
+ 
+        laberintoTorre(m,0,0,2,2,1);
         //laberintoTodasCasillas(m,2,2,1,1,1);
         //laberintoAlgunasCasillas(m,2,2,0,0,2);
         //laberintoMejoradoDiagonal(m,0,0,2,2,1);
@@ -66,6 +66,63 @@ public class LaberintoV {
         if(posValida(m,i+1,j)) L1.add(new Regla(i+1,j));
         return L1;
     }
+    //TORRE
+        public static void laberintoTorre(int m[][], int i, int j, 
+                                int i1, int j1, int paso){
+        m[i][j]=paso;
+        if(i==i1 && j==j1) { mostrar(m); c++; }
+        
+        LinkedList<Regla> L1 = reglasAplicablesTorre(m,i,j);
+        while(!L1.isEmpty()){
+            Regla R = elegirReglaA(L1, i1, j1);
+            //Regla R = elegirReglaB(L1, i1, j1);
+            m[R.fil][R.col]=paso;
+            laberintoTorre(m, R.fil, R.col, i1, j1, paso+1);
+            m[R.fil][R.col]=0;
+        }
+    }
+     private static LinkedList<Regla> reglasAplicablesTorre(int m[][], int i, int j) {
+        LinkedList<Regla> L1 = new LinkedList();
+        if(posValida(m,i,j-1)) 
+        {
+            int aux = j - 1;
+            while(posValida(m,i,aux))
+            {
+                aux = aux - 1;
+            }
+        L1.add(new Regla(i,aux + 1));
+        }
+        if(posValida(m,i-1,j)) 
+        {
+            int aux = i - 1;
+            while(posValida(m,aux,j))
+            {
+                aux = aux - 1;
+            }
+        L1.add(new Regla(aux + 1,j));
+        }
+        if(posValida(m,i,j+1)) 
+        {
+            int aux = j + 1;
+            while(posValida(m,i,aux))
+            {
+                aux = aux + 1;
+            }
+        L1.add(new Regla(i,aux - 1));
+        }
+        if(posValida(m,i+1,j)) 
+        {
+            int aux = i + 1;
+            while(posValida(m,aux,j))
+            {
+                aux = aux + 1;
+            }
+        L1.add(new Regla(aux - 1,j));
+        }
+  
+         return L1;
+    }
+    
 
     private static Regla elegirReglaA(LinkedList<Regla> L1, int i1, int j1) {
         return L1.removeFirst();
