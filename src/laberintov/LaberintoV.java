@@ -85,39 +85,43 @@ public class LaberintoV {
         LinkedList<Regla> L1 = new LinkedList();
         if(posValida(m,i,j-1)) 
         {
-            int aux = j - 1;
+            int aux = j - 1;//1
             while(posValida(m,i,aux))
             {
-                aux = aux - 1;
+                L1.add(new Regla(i,aux));
+                aux = aux - 1; // 0
             }
-        L1.add(new Regla(i,aux + 1));
+        
         }
         if(posValida(m,i-1,j)) 
         {
             int aux = i - 1;
             while(posValida(m,aux,j))
             {
+                L1.add(new Regla(aux,j));
                 aux = aux - 1;
             }
-        L1.add(new Regla(aux + 1,j));
+        
         }
         if(posValida(m,i,j+1)) 
         {
             int aux = j + 1;
             while(posValida(m,i,aux))
             {
+                L1.add(new Regla(i,aux));
                 aux = aux + 1;
+               
             }
-        L1.add(new Regla(i,aux - 1));
+        
         }
         if(posValida(m,i+1,j)) 
         {
             int aux = i + 1;
             while(posValida(m,aux,j))
             {
+                L1.add(new Regla(aux,j));
                 aux = aux + 1;
             }
-        L1.add(new Regla(aux - 1,j));
         }
   
          return L1;
