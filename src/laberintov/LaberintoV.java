@@ -17,9 +17,15 @@ public class LaberintoV {
     
     public static void main(String[] args) {
         int m[][] = new int[3][3];
-        //laberintoTorre(m, 0, 0, 3, 3, 1);    
-        //laberintoArfil(m, 0, 1, 2, 1, 1);
-        laberintoReina(m, 0, 1, 2, 1, 1);
+        //Pared de Atajo
+        m[0][2]=-1;
+        m[1][2]=-1;
+        m[2][2]=-1;
+
+        
+        //laberintoTorre(m, 0, 0, 2, 2, 1);    
+        //laberintoArfil(m, 0, 2, 4, 2, 1);
+        laberintoReina(m, 0, 0, 1, 1, 1);
         //laberintoTorre(m,0,0,2,2,1);
         //laberintoTodasCasillas(m,2,2,1,1,1);
         //laberintoAlgunasCasillas(m,2,2,0,0,2);
