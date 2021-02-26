@@ -11,7 +11,7 @@ import nreinasM.Regla;
 public class Nreinas {
     
     public static long c = 0;
-    public static boolean flag = true;
+    public static int flag = 0;
     public static void main(String[] args) {
         for (int n = 1; n <= 30; n++) {
             int m[][] = new int [n][n];
@@ -121,12 +121,12 @@ public class Nreinas {
         return L1.remove((int)(Math.random() * L1.size()));
     }
     
-    private static Regla elegirReglaD(LinkedList<Regla> L1, boolean flag) {
-        if (flag){
-            flag=!flag;
+    private static Regla elegirReglaD(LinkedList<Regla> L1, int flag) {
+        if (flag>17){
+            
             return L1.remove(L1.size()/2);
         }
-        flag=!flag;
+        
         return L1.remove((int)(Math.random() * L1.size()));
     }
 
