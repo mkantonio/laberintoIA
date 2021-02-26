@@ -13,10 +13,26 @@ import java.util.LinkedList;
  */
 public class NReina {
     public static long c = 0;
+    public static int b = 1;
+    public static boolean flag = true;
+    public static int up = 0;
+    public static int down = 0;
     
     public static void main(String[] args) {
+        
+        /*for (int n = 1; n <= 30; n++) {
+            int m[][] = new int [n][n];
+            if(nReinas(m, 0)){
+                System.out.println(c);
+            }else{
+                System.out.println(c + " No existe solución 😑👎");
+
+            }
+            c=0;
+        }
+        */
             
-        int n = 4;
+        int n = 10;
         int m[][] = new int[n][n];
         if(nReinas(m,0)){
             System.out.println("Existe Solucion... !");
@@ -25,15 +41,43 @@ public class NReina {
         else 
         System.out.println("No Existe Solucion... !");
         System.out.println("vueltas = " + c)  ;
+       
     }
+    
+    public static int filaAplicable(int m[][], int i)
+    {
+        down = m.length - i;
+        up = i;
+        if(down - up <= 0)
+        {
+            System.out.println(i);
+            return down;
+        }
+        else
+        {
+            if(!flag)
+            {                
+                System.out.println(i + "u");
+                flag = false;
+                return up;
+            }   
+            else{ 
+                System.out.println(i + "d");
+                flag = true;
+                return down;
+            }
         
+        }
+           
+    }
+    
     public static boolean nReinas(int m[][], int i){
         if(i >= m.length) return true;
         LinkedList<Regla> L1 = reglasAplicables(m,i);
         while(!L1.isEmpty()){
-            Regla R = elegirReglaA(L1);
+            Regla R = elegirReglaB(L1);
             m[R.fil][R.col] = i + 1;
-            if(nReinas(m, i + 1)) return true;
+            if(nReinas(m, filaAplicable(m, i + 1))) return true;
             m[R.fil][R.col] = 0;
             c++;
         }            
@@ -52,6 +96,34 @@ public class NReina {
     public static Regla elegirReglaC(LinkedList<Regla> L1){
         return L1.remove((int) (Math.random() * L1.size()));    
     }
+    
+    public static Regla elegirReglaD(LinkedList<Regla> L1){
+        Regla R = new Regla(0,0);
+        switch (b)
+        {
+            case 1:
+                b++;
+                R = L1.removeFirst();
+                //System.out.println("Case 1");
+                break;
+                
+            case 2:
+                b++;
+                R = L1.remove(L1.size() / 2);
+                //System.out.println("Case 2");
+                break;
+            case 3:
+                b=1;
+                R = L1.remove(L1.size()-1);
+                //System.out.println("Case 3");
+                break;
+        }
+        return R;
+                
+    }
+    //public static Regla elegirReglaE(LinkedList<Regla> L1){
+        
+    //}
     
     public static LinkedList<Regla> reglasAplicables(int m[][], int i)
     {
