@@ -14,9 +14,9 @@ public static void main(String[] args) {
         int m[][] = new int[4][5];   
         
         //laberintoCaballo(m,2,2,3,4,1);
-        //laberintoCaballoMejorado(m,2,2,3,4,1);
+        laberintoCaballoMejorado(m,2,2,3,4,1);
         //laberintoCaballoSinFinal(m,2,2,1);
-        laberintoCaballoMejoradoSinFinal(m,2,2,1);
+        //laberintoCaballoMejoradoSinFinal(m,2,2,1);
         
         //laberintoCaballo(m,0,0,0,0,1);
         System.out.println("Sol= "+c);
@@ -91,7 +91,7 @@ public static void main(String[] args) {
         if(posValida(m,i+1,j+2)) L1.add(new Regla(i+1,j+2));
         if(posValida(m,i+2,j+1)) L1.add(new Regla(i+2,j+1));
         if(posValida(m,i+2,j-1)) L1.add(new Regla(i+2,j-1));
-        if(posValida(m,i+1,j-1)) L1.add(new Regla(i+1,j-1));
+        if(posValida(m,i+1,j-2)) L1.add(new Regla(i+1,j-2));
         return L1;
     }
      
@@ -121,7 +121,7 @@ public static void main(String[] args) {
 	laberintoCaballo(m,i+1,j+2,i1,j1,paso+1);
 	laberintoCaballo(m,i+2,j+1,i1,j1,paso+1);
 	laberintoCaballo(m,i+2,j-1,i1,j1,paso+1);
-	laberintoCaballo(m,i+1,j-1,i1,j1,paso+1);   
+	laberintoCaballo(m,i+1,j-2,i1,j1,paso+1);   
         m[i][j] = 0;
     }
      
@@ -155,7 +155,7 @@ public static void main(String[] args) {
         laberintoCaballoSinFinal(m, i + 1, j + 2, paso + 1, tamaño);
         laberintoCaballoSinFinal(m, i + 2, j + 1, paso + 1, tamaño);
         laberintoCaballoSinFinal(m, i + 2, j - 1, paso + 1, tamaño);
-        laberintoCaballoSinFinal(m, i + 1, j - 1, paso + 1, tamaño);
+        laberintoCaballoSinFinal(m, i + 1, j - 2, paso + 1, tamaño);
         m[i][j] = 0;
     }
     
