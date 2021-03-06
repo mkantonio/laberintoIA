@@ -19,10 +19,19 @@ public class NReina {
     public static int down = 0;
     
     public static void main(String[] args) {
-        
-        /*for (int n = 1; n <= 30; n++) {
+          int m[][]= new int[5][5];
+        if(nCaballos(m,0)){
+            System.out.println("Existe Solucion... !");
+            mostrar(m);
+        }
+        else 
+        System.out.println("No Existe Solucion... !");
+        System.out.println("vueltas = " + c)  ;
+          
+          
+       /* for (int n = 1; n <= 7; n++) {
             int m[][] = new int [n][n];
-            if(nReinas(m, 0)){
+            if(nCaballos(m, 0)){
                 System.out.println(c);
             }else{
                 System.out.println(c + " No existe solución 😑👎");
@@ -30,24 +39,27 @@ public class NReina {
             }
             c=0;
         }
-        */
+        
             
-        int n = 10;
+        /*int n = 10;
         int m[][] = new int[n][n];
-        if(nReinas(m,0)){
+        if(nCaballos(m,0)){
             System.out.println("Existe Solucion... !");
             mostrar(m);
         }
         else 
         System.out.println("No Existe Solucion... !");
         System.out.println("vueltas = " + c)  ;
-       
+       */
+            
     }
+
     
+    /*
     public static int filaAplicable(int m[][], int i)
     {
         down = m.length - i;
-        up = i;
+   
         if(down - up <= 0)
         {
             System.out.println(i);
@@ -58,12 +70,12 @@ public class NReina {
             if(!flag)
             {                
                 System.out.println(i + "u");
-                flag = false;
+                flag = true;
                 return up;
             }   
             else{ 
                 System.out.println(i + "d");
-                flag = true;
+                flag = false;
                 return down;
             }
         
@@ -82,7 +94,55 @@ public class NReina {
             c++;
         }            
         return false;
+    }*/
+    //CABALLO
+    private static boolean posValidaCaballo(int[][] m, int i, int j) {
+        return i >= 0 && i < m.length && j >= 0 
+                && j < m[i].length && m[i][j] == 0;
     }
+
+    private static void mostrarL(LinkedList<Regla> L1) {
+        for (Regla regla : L1) {
+            System.out.print(regla.fil+","+regla.col+" ; ");
+        }
+        System.out.println("");
+    }
+    public static boolean nCaballos(int m[][], int i){
+        m[0][0]=1;
+        return nCaballos(m, i, new Regla(0,0) ,m.length*m[i].length);
+    }
+    
+    private static boolean nCaballos(int m[][], int paso, Regla p, int tamaño){
+        if(paso == tamaño){ return true; }
+   
+        LinkedList<Regla> L1 = reglasAplicablesCaballo(m, p); 
+   
+        while (!L1.isEmpty()){
+            Regla R = elegirReglaB(L1);
+            m[R.fil][R.col] = paso + 1;
+            if (nCaballos(m, paso+1,R, tamaño)){ return true; }
+            m[R.fil][R.col] = 0;
+            c++;
+        }
+        return false;
+    }
+    
+    
+    private static LinkedList<Regla> reglasAplicablesCaballo(int[][] m, Regla p) {
+        LinkedList<Regla> L1 = new LinkedList();
+         //Probar en posValidaCaballo con par de k y j    
+                if(posValidaCaballo(m,p.fil-1,p.col-2)) L1.add(new Regla(p.fil-1,p.col-2));
+                if(posValidaCaballo(m,p.fil-2,p.col-1)) L1.add(new Regla(p.fil-2,p.col-1));
+                if(posValidaCaballo(m,p.fil-2,p.col+1)) L1.add(new Regla(p.fil-2,p.col+1));
+                if(posValidaCaballo(m,p.fil-1,p.col+2)) L1.add(new Regla(p.fil-1,p.col+2));
+                if(posValidaCaballo(m,p.fil+1,p.col+2)) L1.add(new Regla(p.fil+1,p.col+2));
+                if(posValidaCaballo(m,p.fil+2,p.col+1)) L1.add(new Regla(p.fil+2,p.col+1));
+                if(posValidaCaballo(m,p.fil+2,p.col-1)) L1.add(new Regla(p.fil+2,p.col-1));
+                if(posValidaCaballo(m,p.fil+1,p.col-2)) L1.add(new Regla(p.fil+1,p.col-2));
+
+        return L1;        
+    }
+ 
     
     //Sin heuristica
     public static Regla elegirReglaA(LinkedList<Regla> L1){
