@@ -20,7 +20,7 @@ public class NReina {
     
     public static void main(String[] args) {
           int m[][]= new int[5][5];
-        if(nCaballos(m,0)){
+        if(nCaballos(m,1,0,0)){
             System.out.println("Existe Solucion... !");
             mostrar(m);
         }
@@ -107,9 +107,9 @@ public class NReina {
         }
         System.out.println("");
     }
-    public static boolean nCaballos(int m[][], int i){
-        m[0][0]=1;
-        return nCaballos(m, i, new Regla(0,0) ,m.length*m[i].length);
+    public static boolean nCaballos(int m[][], int paso, int i, int j){
+        m[i][j]=1;
+        return nCaballos(m, i, new Regla(i,j) ,m.length*m[i].length);
     }
     
     private static boolean nCaballos(int m[][], int paso, Regla p, int tamaño){
@@ -148,6 +148,10 @@ public class NReina {
     public static Regla elegirReglaA(LinkedList<Regla> L1){
         return L1.removeFirst();
     }
+    public static Regla elegirReglaF(LinkedList<Regla> L1){
+        return L1.removeLast();
+    }
+
     //Con heuristica
     public static Regla elegirReglaB(LinkedList<Regla> L1){
     return L1.remove(L1.size() / 2);
