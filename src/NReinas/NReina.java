@@ -19,7 +19,7 @@ public class NReina {
     public static int down = 0;
     
     public static void main(String[] args) {
-          int m[][]= new int[5][5];
+    /*      int m[][]= new int[3][4];
         if(nCaballos(m,1,0,0)){
             System.out.println("Existe Solucion... !");
             mostrar(m);
@@ -27,15 +27,17 @@ public class NReina {
         else 
         System.out.println("No Existe Solucion... !");
         System.out.println("vueltas = " + c)  ;
-          
-          
-       /* for (int n = 1; n <= 7; n++) {
-            int m[][] = new int [n][n];
-            if(nCaballos(m, 0)){
+    */      
+      
+        
+        for (int n = 1; n <= 8; n++) {
+            int m[][] = new int [n+1][n];
+            if(nCaballos(m, 1,0,0)){
+              
                 System.out.println(c);
             }else{
-                System.out.println(c + " No existe solución 😑👎");
-
+                System.out.println(c + " No existe");
+//solución 😑👎
             }
             c=0;
         }
@@ -109,7 +111,7 @@ public class NReina {
     }
     public static boolean nCaballos(int m[][], int paso, int i, int j){
         m[i][j]=1;
-        return nCaballos(m, i, new Regla(i,j) ,m.length*m[i].length);
+        return nCaballos(m, paso, new Regla(i,j) ,m.length*m[i].length);
     }
     
     private static boolean nCaballos(int m[][], int paso, Regla p, int tamaño){
@@ -118,7 +120,7 @@ public class NReina {
         LinkedList<Regla> L1 = reglasAplicablesCaballo(m, p); 
    
         while (!L1.isEmpty()){
-            Regla R = elegirReglaB(L1);
+            Regla R = elegirReglaD(L1);
             m[R.fil][R.col] = paso + 1;
             if (nCaballos(m, paso+1,R, tamaño)){ return true; }
             m[R.fil][R.col] = 0;
