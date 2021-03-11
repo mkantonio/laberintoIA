@@ -246,7 +246,7 @@ public class LaberintoV {
             int aux = j - 1;//1
             while(posValida(m,i,aux))
             {
-                L1.add(new Regla(i,aux));
+                L1.add(new Regla(i,aux ));
                 aux = aux - 1; // 0
             }
         
